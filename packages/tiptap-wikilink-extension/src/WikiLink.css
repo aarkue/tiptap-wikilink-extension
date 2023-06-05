@@ -1,0 +1,29 @@
+.wikilink {
+  color: rgb(5, 41, 143);
+  background: none;
+  padding: 0;
+  margin: 0 1px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  font-size: inherit;
+  font-weight: inherit;
+  --wikilink-padding: 5px;
+  display: inline-block;
+  text-decoration: underline;
+}
+
+.wikilink::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  background-color: rgba(145, 233, 255, 0.322);
+  width: calc(100% + var(--wikilink-padding));
+  left: 1ch;
+  top: 0.5ch;
+  height: 2ch;
+  left: calc(-0.5 * var(--wikilink-padding));
+  top: 0;
+  height: 100%;
+  border-radius: 5px;
+}

@@ -1,0 +1,80 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --alt-bg-color: #151414;
+  --alt-fg-color: #fafafa;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+
+    --alt-bg-color: #fafafa;
+  }
+  a:hover {
+    color: #747bff;
+  }
+}
+
+.tiptap-editor {
+  padding: 0.5rem;
+}
+
+.ProseMirror {
+  background-color: var(--alt-bg-color);
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+}
+
+.editor-suggestion{
+  border-bottom: 1px solid blue;
+}
+.suggestion-container {
+ width: 10rem;
+ background-color: white;
+ padding: 0.5rem;
+ border-radius: 1rem;
+ border: 1px solid rgba(110, 226, 199, 0.428);
+}
+
+.suggestion-option {
+  width: 95%;
+  background-color: white;
+  padding: 5px; 
+  border-radius: 5px;
+}
+.suggestion-container .suggestion-option {
+  border-bottom: 1px solid rgba(110, 226, 199, 0.428);
+}
+.suggestion-container .suggestion-option:last-child {
+  border-bottom: 1px solid white;
+}
+.active-option {
+  background-color: rgba(110, 226, 199, 0.428);
+}
