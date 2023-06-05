@@ -35,7 +35,7 @@ export const WikiLinkNode = Node.create<WikiLinkNodeOptions>({
   },
   addOptions(): WikiLinkNodeOptions {
     return {
-      onWikiLinkClick: undefined,
+      onWikiLinkClick: () => {},
     };
   },
 
@@ -71,7 +71,7 @@ export const WikiLinkNode = Node.create<WikiLinkNodeOptions>({
           }
           const node = state.doc.nodeAt(anchor - 1);
           let preventDefault = false;
-          if (node.type.name === this.name) {
+          if (node && node.type.name === this.name) {
             preventDefault = true;
 
             state.doc.nodesBetween(anchor - 1, anchor, (node, pos) => {

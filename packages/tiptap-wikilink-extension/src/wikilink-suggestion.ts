@@ -1,6 +1,6 @@
-import { Content, Editor, Extension, InputRule, mergeAttributes, Node, PasteRule } from "@tiptap/core";
+import { Editor, Extension } from "@tiptap/core";
 import { Decoration, DecorationSet } from "@tiptap/pm/view";
-import { EditorState, Plugin, PluginKey } from "prosemirror-state";
+import { Plugin, PluginKey } from "prosemirror-state";
 export const WikiLinkNodePluginKey = new PluginKey("wikiLink-command");
 
 export type RenderSuggestionFunction = (
@@ -17,7 +17,7 @@ export const WikiLinkSuggestion = Extension.create<{ renderSuggestionFunction: R
 
   addOptions() {
     return {
-      renderSuggestionFunction: undefined,
+      renderSuggestionFunction: () => {},
     };
   },
 
@@ -29,7 +29,7 @@ export const WikiLinkSuggestion = Extension.create<{ renderSuggestionFunction: R
     }
     document.body.appendChild(element);
     return [
-      new Plugin({
+      new Plugin<{ active: boolean; range: {} | { from: number; to: number }; text: string | null }>({
         key: WikiLinkNodePluginKey,
         view: () => ({
           update: (view, prevState) => {
@@ -38,6 +38,9 @@ export const WikiLinkSuggestion = Extension.create<{ renderSuggestionFunction: R
             if (nextWikiState.active) {
               const node = view.domAtPos(prevWikiState.range.from);
               const suggestionNode = (node.node as HTMLElement).querySelector(".editor-suggestion");
+              if(!suggestionNode){
+                return;
+              }
               const boundingRect = suggestionNode.getBoundingClientRect();
               element.style.position = "fixed";
               element.style.left = boundingRect.left + "px";
@@ -59,14 +62,14 @@ export const WikiLinkSuggestion = Extension.create<{ renderSuggestionFunction: R
         }),
         state: {
           init: () => ({ active: false, range: {}, text: null }),
-          apply: (tr, prevVal, oldState, newState) => {
+          apply: (tr, prevVal) => {
             const selection = tr.selection;
             const nextVal = { ...prevVal };
             if (selection.from === selection.to) {
               const pos = selection.$from;
               const text = pos.doc.textBetween(pos.before(), pos.end());
               const match = matchRegex.exec(text);
-              if(text.startsWith("[[ ") || text.endsWith(" ") || (match && match[0].split(" ").length > 2)){
+              if (text.startsWith("[[ ") || text.endsWith(" ") || (match && match[0].split(" ").length > 2)) {
                 nextVal.active = false;
                 nextVal.range = {};
                 nextVal.text = null;
@@ -106,14 +109,14 @@ export const WikiLinkSuggestion = Extension.create<{ renderSuggestionFunction: R
                 activeOption.dispatchEvent(ev);
                 return true;
               }
-            }else if(event.key == "Escape"){
+            } else if (event.key == "Escape") {
               console.log("Escape");
               wikiLinkState.active = false;
-              element.style.display = "none"
+              element.style.display = "none";
               return false;
-            }else if(event.key === "Enter" && event.shiftKey){
+            } else if (event.key === "Enter" && event.shiftKey) {
               wikiLinkState.active = false;
-              element.style.display = "none"
+              element.style.display = "none";
               return false;
             }
             return false;
