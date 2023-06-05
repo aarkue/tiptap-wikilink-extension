@@ -16,3 +16,5 @@ There is currently no `npmjs.org` package published, but meanwhile, this extensi
 
 ## Screenshots + Demo
 Try out the demo directly online at [https://aarkue.github.io/tiptap-wikilink-extension/](https://aarkue.github.io/tiptap-wikilink-extension/)!
+
+![2023-06-05_10-55](https://github.com/aarkue/tiptap-wikilink-extension/assets/20766652/ef28811e-7833-418b-b5d8-f33d0ffe3e27)
