@@ -11,7 +11,7 @@ export interface WikiLinkExtensionOptions {
 }
 
 export const WikiLinkExtension = Extension.create<WikiLinkExtensionOptions>({
-  name: "wikiLink",
+  name: "wikiLinkExtension",
   
   addExtensions() {
     const extensions = [];
