@@ -26,7 +26,7 @@ const Tiptap = () => {
                 onSelection={({ id, text }: { id: string; text: string }) => {
                   let content: Content = [
                     {
-                      type: "wikiLink",
+                      type: "wikiLinkNode",
                       attrs: { name: text, id: id },
                     },
                   ];

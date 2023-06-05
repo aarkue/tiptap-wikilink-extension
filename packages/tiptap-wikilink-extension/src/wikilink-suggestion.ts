@@ -14,6 +14,7 @@ export const matchRegex = /\[\[[^\s]?[^\]]*\]*/;
 
 export const WikiLinkSuggestion = Extension.create<{ renderSuggestionFunction: RenderSuggestionFunction }>({
   name: "wikilink-suggestion",
+  priority: 1000,
 
   addOptions() {
     return {
